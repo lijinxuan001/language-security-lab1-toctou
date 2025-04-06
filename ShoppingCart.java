@@ -1,4 +1,5 @@
 import backEnd.*;
+import backEnd.Store;
 import java.util.Scanner;
 
 public class ShoppingCart {
@@ -22,12 +23,14 @@ public class ShoppingCart {
         String product = scan(scanner);
 
         while(!product.equals("quit")) {
-            /* TODO:
-               - check if the amount of credits is enough, if not stop the execution.
-               - otherwise, withdraw the price of the product from the wallet.
-               - add the name of the product to the pocket file.
-               - print the new balance.
-            */
+            if(wallet.getBalance() < Store.getProductPrice(product)){ //Checks if the balance is smaller than the price of the requested product
+                return; //Quits if that is the case
+            }
+        else { //Product was not too expensive
+            wallet.setBalance(wallet.getBalance()-Store.getProductPrice(product)); // Removes the product price from the balance
+            pocket.addProduct(product); //Adds product to pocket
+            System.out.println("Your new balance is: " + wallet.getBalance() + " credits."); //Prints new balance
+        }
 
             // Just to print everything again...
             print(wallet, pocket);
