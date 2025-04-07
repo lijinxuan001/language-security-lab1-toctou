@@ -1,5 +1,4 @@
 import backEnd.*;
-import backEnd.Store;
 import java.util.Scanner;
 
 public class ShoppingCart {
@@ -23,7 +22,8 @@ public class ShoppingCart {
         String product = scan(scanner);
 
         while(!product.equals("quit")) {
-            if(wallet.getBalance() < Store.getProductPrice(product)){ //Checks if the balance is smaller than the price of the requested product
+            int balance = wallet.getBalance();
+            if(balance < Store.getProductPrice(product)){ //Checks if the balance is smaller than the price of the requested product
                 return; //Quits if that is the case
             }
         else { //Product was not too expensive
