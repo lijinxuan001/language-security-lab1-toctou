@@ -1,9 +1,6 @@
 package backEnd;
 import java.io.File;
-import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.FileReader;
-import java.io.BufferedReader;
 
 
 public class Pocket {
@@ -47,7 +44,7 @@ public class Pocket {
 
         return sb.toString();
     }
-
+    
     /**
      * Closes the RandomAccessFile in this.file
      */

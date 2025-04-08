@@ -22,16 +22,16 @@ public class ShoppingCart {
         String product = scan(scanner);
 
         while(!product.equals("quit")) {
-            int balance = wallet.getBalance();
-            if(balance < Store.getProductPrice(product)){ //Checks if the balance is smaller than the price of the requested product
-                return; //Quits if that is the case
-            }
-        else { //Product was not too expensive
-            wallet.setBalance(wallet.getBalance()-Store.getProductPrice(product)); // Removes the product price from the balance
-            pocket.addProduct(product); //Adds product to pocket
-            System.out.println("Your new balance is: " + wallet.getBalance() + " credits."); //Prints new balance
+            int price = Store.getProductPrice(product); //Gets the price of the requested product
+            if (price == -1) {
+                System.out.println("Product not found.");
         }
-
+        else if(wallet.safeWithdraw(price)){ //Product was not too expensive
+            pocket.addProduct(product); //Adds product to pocket
+            System.out.println("You bought " + product ); //Prints success message
+        }else{
+            System.out.println("Insufficient balance for " + product + "."); //Prints error message
+        }  
             // Just to print everything again...
             print(wallet, pocket);
             product = scan(scanner);
