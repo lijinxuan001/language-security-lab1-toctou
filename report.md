@@ -59,7 +59,7 @@ public boolean safeWithdraw(int valueToWithdraw) throws Exception {
     }
 ```
 
-Other APIs may also suffer from race conditions include the __Pocket.class__, which writes purchased products to a shared file __pocket.txt__. Without synchronization, concurrent processes may cause corrupted or lost writes. We can solve this by writing a safeassProduct method implementing the necessary protections with ReentrantLock. 
+Other APIs may also suffer from race conditions include the `Pocket.class`, which writes purchased products to a shared file `pocket.txt`. Without synchronization, concurrent processes may cause corrupted or lost writes. We can solve this by writing a safeassProduct method implementing the necessary protections with ReentrantLock. 
 ```java
     public void safeaddProduct(String product) throws Exception {
         lock.lock();
@@ -71,6 +71,6 @@ Other APIs may also suffer from race conditions include the __Pocket.class__, wh
         }
     }
 ```
-While, the __Store.class__ only serves as a read-only source of static product data, and thus does not require protection. 
+While, the `Store.class` only serves as a read-only source of static product data, and thus does not require protection. 
 
 We minimal the loc scope within critical sections.We don't lock read-only data. And locks are held for the shortest time possible, reducing contention windows. 
